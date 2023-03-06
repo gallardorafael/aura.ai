@@ -8,24 +8,11 @@ Unlike other transcription and summarization services that require you to upload
 
 We hope that aura.ai will help you make the most out of your online meetings and voice-based activities. Try it today and see for yourself how aura.ai can transform your audio into actionable insights.
 
-## Git workflow
+## Installation
 
-This project will use the [Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow) for Git. All temporary branches (features, bugs, hotfixes, etc.) must be created and pushed to the "development" branch, the "development" branch will only get merged to main when a stable version is ready. Each release will be tagged as "vMajor.Minor.Patch" according to the [Semantic Versioning](https://semver.org/) definitions. Main will always contain the latest stable version.
+Follow instructions [here](INSTALL.md).
 
-### Branch names
-Branch names should start with one of the following categories:
-- bugfix: For branches working in an important bug fix.
-- hotfix: For branches that introduces fast fixes to the codebase.
-- feature: For branches that works on a new feature for the current version.
-- experimental: When working with experimental stuff, commonly out of the scope of the version but that can be useful in the future.
-- docs: For branches that introduces changes in documentation.
+## Contribution guidelines
 
-The naming convention should include the category, and a brief description of the branch work: _category_brief-branch-description_
-
-for example:
-- bugfix_solve-stop-recording-issue
-- feature_implement-transcription-queue
-
-### Commits 
-Commits should be named as [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). 
+Check guidelines [here](docs/CONTRIBUTING.md).
 
