@@ -18,6 +18,7 @@ Branch names should start with one of the following categories:
 - hotfix: For branches that introduces fast fixes to the codebase.
 - feature: For branches that works on a new feature for the current version.
 - experimental: When working with experimental stuff, commonly out of the scope of the version but that can be useful in the future.
+- docs: For branches that introduces changes in documentation.
 
 The naming convention should include the category, and a brief description of the branch work: _category_brief-branch-description_
 
