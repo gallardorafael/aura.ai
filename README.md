@@ -10,7 +10,7 @@ We hope that aura.ai will help you make the most out of your online meetings and
 
 ## Installation
 
-Follow instructions [here](INSTALL.md).
+Follow instructions [here](docs/INSTALL.md).
 
 ## Contribution guidelines
 
