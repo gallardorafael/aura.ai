@@ -3,15 +3,18 @@ from aura.hear import AudioRecorder
 # TODO: move this, should not be global
 recorder = AudioRecorder()
 
+
 def start_recording():
     print("Starting...")
     print(f"Working with event {recorder.event_uuid}.")
     recorder.start_recording()
 
+
 def stop_recording():
     print("Stopping...")
     print(f"Saving records from event {recorder.event_uuid}, in folder: {recorder.root_path}.")
     recorder.stop_recording()
+
 
 def main():
     while True:
@@ -28,6 +31,7 @@ def main():
             exit()
         else:
             print("Invalid command")
+
 
 if __name__ == "__main__":
     main()

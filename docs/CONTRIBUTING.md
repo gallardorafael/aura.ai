@@ -17,5 +17,5 @@ for example:
 - bugfix_solve-stop-recording-issue
 - feature_implement-transcription-queue
 
-### Commits 
-Commits should be named as [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). 
+### Commits
+Commits should be named as [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
