@@ -18,12 +18,12 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(),
     install_requires=[
-        "audiofile",
-        "pyaudio",
+        "soundfile",
+        "soundcard",
     ],
     extras_require={
         "dev": [
-            "pre-commit==2.19.0",
+            "pre-commit",
         ],
     },
     keywords=["aura.ai"],
