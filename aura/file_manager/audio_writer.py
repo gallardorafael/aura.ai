@@ -8,17 +8,15 @@ class AudioWriter:
         self.today = datetime.date.today().strftime("%Y-%m-%d")
 
     def write(self, filename, data, **kwargs):
-        filepath = self.get_filename(filename)
-        soundfile.write(str(filepath), 
+        filepath = self._get_filename(filename)
+        soundfile.write(str(filepath),
                         data, 
                         samplerate=kwargs['framerate'],
-                        channels=kwargs['channels'],
-                        format='flac',
                         )
 
     def _get_filename(self, filename):
         directory = self.root_path / self.today
         if not directory.exists():
             directory.mkdir(parents=True)
-        filepath = directory / filename + ".flac"
+        filepath = directory / Path(filename).with_suffix('.flac')
         return filepath
