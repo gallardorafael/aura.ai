@@ -7,19 +7,17 @@ import numpy as np
 import soundcard as sc
 
 from aura.file_manager import AudioWriter
-from aura.hear import DeviceExplorer
 
 # TODO: create a path when installing aura, for configs and records
 cwd = os.getcwd()
 
-# TODO: make AudioRecorder manage threads instead of being a thread
+
 class AudioRecorder:
     def __init__(self):
         super().__init__()
         self.stop_event = threading.Event()
         self.event_uuid = str(uuid.uuid4())
         self.root_path = Path(cwd) / "aura_records"
-        self.device_explorer = DeviceExplorer()
 
         # threads for recording audio
         self.mic_thread = None
