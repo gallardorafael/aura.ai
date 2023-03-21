@@ -12,7 +12,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 setup(
     name=NAME,
     version=VERSION,
-    author="Rafael Gallardo",
+    author="Aura",
     description=DESCRIPTION,
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -20,6 +20,7 @@ setup(
     install_requires=[
         "soundfile",
         "soundcard",
+        "openai-whisper",
     ],
     extras_require={
         "dev": [
