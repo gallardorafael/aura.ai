@@ -15,9 +15,20 @@ cwd = os.getcwd()
 class AudioRecorder:
     def __init__(self):
         super().__init__()
-        self.stop_event = threading.Event()
         self.event_uuid = str(uuid.uuid4())
         self.root_path = Path(cwd) / "aura_records"
+
+    def start_recording(self):
+        raise NotImplementedError
+
+    def stop_recording(self):
+        raise NotImplementedError
+
+
+class SoundcardAudioRecorder(AudioRecorder):
+    def __init__(self):
+        super().__init__()
+        self.stop_event = threading.Event()
 
         # threads for recording audio
         self.mic_thread = None
