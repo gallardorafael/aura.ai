@@ -1,33 +1,40 @@
-from aura.hear import AudioRecorder
-
-# TODO: move this, should not be global
-recorder = AudioRecorder()
+from aura.brain.hear import AudioRecorder
 
 
-def start_recording():
+def start_recording(recorder):
     print("Starting...")
     print(f"Working with event {recorder.event_uuid}.")
     recorder.start_recording()
 
 
-def stop_recording():
+def stop_recording(recorder):
     print("Stopping...")
     print(f"Saving records from event {recorder.event_uuid}, in folder: {recorder.root_path}.")
     recorder.stop_recording()
 
 
 def main():
+    recorder = None
     while True:
         user_input = input("Enter a command (start/stop/q): ")
         if user_input == "start":
-            if not recorder.recording:
-                start_recording()
+            if recorder is None:
+                recorder = AudioRecorder()
+                start_recording(recorder)
+            else:
+                print("Aura is already recording.")
         elif user_input == "stop":
-            if recorder.recording:
-                stop_recording()
+            if recorder is not None:
+                if recorder.recording:
+                    stop_recording(recorder)
+                    recorder = None
+            else:
+                print("Aura is not recording.")
         elif user_input == "q":
-            if recorder.recording:
-                stop_recording()
+            if recorder is not None:
+                if recorder.recording:
+                    stop_recording(recorder)
+                    recorder = None
             exit()
         else:
             print("Invalid command")
