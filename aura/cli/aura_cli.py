@@ -1,4 +1,4 @@
-from aura.brain.hear import AudioRecorder
+from aura.brain.hear import SoundcardAudioRecorder as Recorder
 
 
 def start_recording(recorder):
@@ -19,7 +19,7 @@ def main():
         user_input = input("Enter a command (start/stop/q): ")
         if user_input == "start":
             if recorder is None:
-                recorder = AudioRecorder()
+                recorder = Recorder()
                 start_recording(recorder)
             else:
                 print("Aura is already recording.")
