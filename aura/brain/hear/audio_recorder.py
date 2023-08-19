@@ -8,6 +8,8 @@ import soundcard as sc
 
 from aura.file_manager import AudioWriter
 
+from .audio_cleaner import SpectralGatingAudioCleaner
+
 # TODO: create a path when installing aura, for configs and records
 cwd = os.getcwd()
 
@@ -27,7 +29,6 @@ class AudioRecorder:
 
 class SoundcardAudioRecorder(AudioRecorder):
     def __init__(self):
-        super().__init__()
         self.stop_event = threading.Event()
 
         # threads for recording audio
@@ -46,6 +47,10 @@ class SoundcardAudioRecorder(AudioRecorder):
             "framerate": 44100,
             "frames_per_buffer": 1024,
         }
+
+        # instantiate the audio cleaner
+        self.audio_cleaner = SpectralGatingAudioCleaner()
+        super().__init__()
 
     def start_recording(self):
         self.recording = True
@@ -90,15 +95,26 @@ class SoundcardAudioRecorder(AudioRecorder):
         # mixing the audio from the two sources
         mixed_data = (self.mic_frames + self.system_frames) / 2
 
+        # cleaning the mixed audio
+        mixed_data = self.audio_cleaner.clean(
+            audio_data=np.moveaxis(mixed_data, -1, 0), sample_rate=self.audio_config["framerate"]
+        )
+        mixed_data = np.moveaxis(mixed_data, -1, 0)
+
         # save the mixed audio to a file with AudioWriter
         writer = AudioWriter(self.root_path)
         writer.write(self.event_uuid, mixed_data, framerate=self.audio_config["framerate"])
 
     def _pad_if_needed(self, array_a, array_b):
         # pad the smallest array with zeros if needed
-        if len(array_a) > len(array_b):
-            array_b = np.pad(array_b, (0, len(array_a) - len(array_b)))
-        elif len(array_a) < len(array_b):
-            array_a = np.pad(array_a, (0, len(array_b) - len(array_a)))
+        if array_a.shape[0] < array_b.shape[0]:
+            # fill the smaller array with zeros in the frame dimension.
+            array_a = np.vstack(
+                [array_a, np.zeros((array_b.shape[0] - array_a.shape[0], array_a.shape[1]))]
+            )
+        elif array_b.shape[0] < array_a.shape[0]:
+            array_b = np.vstack(
+                [array_b, np.zeros((array_a.shape[0] - array_b.shape[0], array_b.shape[1]))]
+            )
 
         return array_a, array_b
