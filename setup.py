@@ -20,7 +20,7 @@ setup(
     install_requires=[
         "soundfile",
         "soundcard",
-        "openai-whisper",
+        "noisereduce",
     ],
     extras_require={
         "dev": [

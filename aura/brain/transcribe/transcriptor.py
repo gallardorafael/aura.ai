@@ -27,7 +27,7 @@ class Transcriptor:
         raise NotImplementedError
 
 
-class WhisperTransciptor(Transcriptor):
+class WhisperTranscriptor(Transcriptor):
     def __init__(self, model_path=None):
         super().__init__()
         self.model = whisper.load_model(model_path)
