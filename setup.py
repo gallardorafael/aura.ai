@@ -20,7 +20,7 @@ setup(
     install_requires=[
         "soundfile",
         "soundcard",
-        "noisereduce",
+        "noisereduce==2.0.1",
     ],
     extras_require={
         "dev": [
