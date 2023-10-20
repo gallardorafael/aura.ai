@@ -23,11 +23,3 @@ class Transcriptor(ABC):
     @abstractmethod
     def detect_language(self):
         ...
-
-    @abstractmethod
-    def _preprocess():
-        ...
-
-    @abstractmethod
-    def _postprocess():
-        ...
