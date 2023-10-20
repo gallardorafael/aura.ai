@@ -2,6 +2,7 @@ import os
 import threading
 import uuid
 from pathlib import Path
+from typing import Optional
 
 import numpy as np
 import soundcard as sc
@@ -28,7 +29,7 @@ class AudioRecorder:
 
 
 class SoundcardAudioRecorder(AudioRecorder):
-    def __init__(self):
+    def __init__(self, clean_audio: Optional[bool] = False):
         self.stop_event = threading.Event()
 
         # threads for recording audio
@@ -48,8 +49,11 @@ class SoundcardAudioRecorder(AudioRecorder):
             "frames_per_buffer": 1024,
         }
 
-        # instantiate the audio cleaner
-        self.audio_cleaner = SpectralGatingAudioCleaner()
+        # instantiate the audio cleaner if needed
+        self.clean_audio = clean_audio
+        if self.clean_audio:
+            self.audio_cleaner = SpectralGatingAudioCleaner()
+
         super().__init__()
 
     def start_recording(self):
@@ -96,9 +100,10 @@ class SoundcardAudioRecorder(AudioRecorder):
         mixed_data = (self.mic_frames + self.system_frames) / 2
 
         # cleaning the mixed audio
-        mixed_data = self.audio_cleaner.clean(
-            audio_data=np.moveaxis(mixed_data, -1, 0), sample_rate=self.audio_config["framerate"]
-        )
+        if self.clean_audio:
+            mixed_data = self.audio_cleaner.clean(
+                audio_data=np.moveaxis(mixed_data, -1, 0), sample_rate=self.audio_config["framerate"]
+            )
         mixed_data = np.moveaxis(mixed_data, -1, 0)
 
         # save the mixed audio to a file with AudioWriter
