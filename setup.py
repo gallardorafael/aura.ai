@@ -26,6 +26,12 @@ setup(
         "dev": [
             "pre-commit",
         ],
+        "hf-models": [
+            "accelerate",
+            "optimum",
+            "torch",
+            "transformers",
+        ],
     },
     keywords=["aura.ai"],
     classifiers=[
