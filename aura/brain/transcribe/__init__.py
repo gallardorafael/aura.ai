@@ -1,1 +1,2 @@
+from .cpu_transcriptors import PyWhisperCPPTranscriptor
 from .torch_transcriptors import HugginFaceWhisperTranscriptor

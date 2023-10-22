@@ -32,6 +32,9 @@ setup(
             "torch",
             "transformers",
         ],
+        "cpp-models": [
+            "pywhispercpp",
+        ],
     },
     keywords=["aura.ai"],
     classifiers=[
