@@ -8,7 +8,9 @@ logger = logging.getLogger(__name__)
 
 
 def main(args):
+    logger.info("Loading aura.ai transcriptors...")
     transcriptor = HugginFaceWhisperTranscriptor()
+    logger.info("Transcriptors are ready!")
 
     logger.info(f"Transcribing audio {args.input_filepath} using {transcriptor.__class__.__name__}")
     outputs = transcriptor.transcribe(args.input_filepath)
